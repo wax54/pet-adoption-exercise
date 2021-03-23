@@ -1,8 +1,8 @@
+"""The main flask program"""
 from flask import Flask, render_template, request, redirect
 from models import connect_db
 from models.Pet import Pet
 from forms.Pet_Forms import NewPetForm, EditPetForm
-from flask_debugtoolbar import DebugToolbarExtension
 
 
 app = Flask(__name__)
@@ -24,6 +24,7 @@ def home_page():
 
 @app.route('/add', methods=["POST", "GET"])
 def add_new_pet():
+    """ Dsiplays the add pet form and handles the POST request for that form """
     form = NewPetForm()
     if form.validate_on_submit():
         new_pet = Pet()
@@ -36,6 +37,9 @@ def add_new_pet():
 
 @app.route('/<int:pet_id>', methods=["POST", "GET"])
 def describe_pet(pet_id):
+    """ Dsiplays information about the specified pet 
+    handles edits to the pet as well"""
+
     pet = Pet.get(pet_id)
     form = EditPetForm(obj=pet)
 

@@ -1,3 +1,4 @@
+"""The Pet Model in the DB"""
 from models import db, BasicOperations
 
 
