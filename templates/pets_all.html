@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} All Pets {% endblock %}
+
+{% block content %}
+
+<h1 class="display-1"> Hello</h1>
+<div class="container">
+    <div class="row">
+        {% for pet in pets %}
+        <div class="card col-12 col-md-6 col-lg-4 col-xl-3">
+            {% if pet.photo_url %}
+            <img class="card-img-top" src="{{pet.photo_url}}" alt="{{pet.name}}s Photo">
+            {% else %}
+            <img class="card-img-top" src="" alt="No Photo Available">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{pet.name}}</h5>
+                {% if pet.available %}
+                <a href="/{{pet.id}}" class="btn btn-primary">
+                    Adopt {{pet.name}}!
+                </a>
+                {% else %}
+                Sorry, {{pet.name}} has already been adopted.
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row pt-4">
+        <a href="/add" class="btn btn-outline-primary">Add Pet</a>
+    </div>
+</div>
+
+{% endblock %}

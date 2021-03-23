@@ -1,10 +1,10 @@
 from models import db, BasicOperations
 
 
-class Pet(BasicOperations):
+class Pet(db.Model, BasicOperations):
     __tablename__ = 'pets'
 
-    id = db.Column(db.Integer, autoincrement=True)
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     species = db.Column(db.Text, nullable=False)
     photo_url = db.Column(db.Text)

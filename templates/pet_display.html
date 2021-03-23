@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add A New Pet!
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card col-8">
+            {% if pet.photo_url %}
+            <img class="card-img-top" src="{{pet.photo_url}}" alt="{{pet.name}}'s Photo">
+            {% else %}
+            <img class="card-img-top" src="" alt="No Photo Available">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{pet.name}}</h5>
+                <div class="card-text">Species: {{pet.species}}</div>
+                <div class="card-text">Age:
+                    {% if pet.age %}
+                    {{pet.age}}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<form method="POST" class="container">
+    <div class="row">
+        {{form.hidden_tag()}}
+
+        <div class="form-group pt-1 col-12 col-md-6 col-lg-4">
+            {{form.photo_url.label}}
+            {{form.photo_url(class_="form-control")}}
+
+            {% for error in form.photo_url.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group pt-1 col-12 col-md-6 col-lg-4">
+            {{form.notes.label}}
+            {{form.notes(class_="form-control")}}
+
+            {% for error in form.notes.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-check pt-1 col-12 col-md-6 col-lg-4">
+            {{form.available.label(class_="form-check-label")}}
+            {{form.available(class_="form-check-input")}}
+
+            {% for error in form.available.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <input class="btn btn-success" type="submit" value="Add Pet">
+</form>
+{% endblock %}
