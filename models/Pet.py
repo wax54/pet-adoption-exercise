@@ -1,10 +1,10 @@
 """The Pet Model in the DB"""
-from models import db, BasicOperations
+from models import db, AbstractDBModel
 
 
-class Pet(db.Model, BasicOperations):
+class Pet(db.Model, AbstractDBModel):
     __tablename__ = 'pets'
-
+    
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     species = db.Column(db.Text, nullable=False)
